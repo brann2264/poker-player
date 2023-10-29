@@ -24,7 +24,6 @@ class Player():
         self.save_dir = save_dir
 
         self.net = PokerDQN(self.state_dim, self.action_dim).float()
-        self.net = self.net.to(device=self.device)
 
         self.exploration_rate = 1
         self.exploration_rate_decay = 0.99999975
@@ -41,7 +40,7 @@ class Player():
         self.gamma = 0.9
         self.optimizer = torch.optim.Adam(self.net.parameters(), lr=1e-4)
         self.loss_fn = nn.SmoothL1Loss()
-        self.sync_steps = 3
+        self.sync_steps = 1e4
 
     def act(self, state):
         #Explore
@@ -95,7 +94,7 @@ class Player():
     def optim_Q_current(self, current_est, target):
         loss = self.loss_fn(current_est, target)
         self.optimizer.zero_grad()
-        loss.bacmward()
+        loss.backward()
         self.optimizer.step()
         return loss.item()
     
@@ -125,6 +124,8 @@ class PokerDQN(nn.Module):
                                    nn.ReLU(),
                                    nn.Linear(64, num_actions))
         self.target = copy.deepcopy(self.current)
+        for p in self.target.parameters():
+            p.requires_grad = False
     
     def forward(self, x, model):
         if model == "current":

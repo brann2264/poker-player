@@ -1,39 +1,6 @@
 import random
 import numpy as np
-
-class card:
-
-    def __init__(self, suit, value):
-        self.suit = suit
-        self.value = value
-        self.values = {14:"Ace", 13:"King", 12:"Queen", 11:"Jack", 10:"10", 9:"9", 8:"8", 7:"7", 6:"6", 5:"5", 4:"4", 3:"3", 2:"2"}
-    
-    def __eq__ (self, other):
-        return (self.value == other.value)
-
-    def __ne__ (self, other):
-        return (self.value != other.value)
-
-    def __lt__ (self, other):
-        return (self.value < other.value)
-
-    def __le__ (self, other):
-        return (self.value <= other.value)
-
-    def __gt__ (self, other):
-        return (self.value > other.value)
-
-    def __ge__ (self, other):
-        return (self.value >= other.value)
-    
-    def __add__ (self, int):
-        return card(self.suit, self.value+1)
-    
-    def __sub__ (self, int):
-        return card(self.suit, self.value-1)
-    
-    def __repr__(self):
-        return f'{self.values[self.value]} of {self.suit}'
+from cards import card
 
 class deck:
    

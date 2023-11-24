@@ -1,5 +1,5 @@
 from agent import Player
-from environment.env import PokerTable
+from environment.poker_table import PokerTable
 
 episodes = 40
 

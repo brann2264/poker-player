@@ -16,8 +16,9 @@ from nes_py.wrappers import JoypadSpace
 from tensordict import TensorDict
 from torchrl.data import TensorDictReplayBuffer, LazyMemmapStorage
 
-class Player():
+class Agent():
     def __init__(self, state_dim, action_dim, save_dir):
+
         # Action Variables
         self.state_dim = state_dim
         self.action_dim = action_dim
